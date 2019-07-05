@@ -19,12 +19,11 @@ const Route = use("Route");
 Route.post("/register", "AuthController.register");
 Route.post("/authenticate", "AuthController.authenticate");
 
-Route.get("/pok", ({ request }) => {
-  return { name: "pok" };
-});
-
 Route.group(() => {
   Route.resource("pokemons", "PokemonController")
+    .apiOnly()
+    .except("update");
+  Route.resource("treinador", "TreinadorController")
     .apiOnly()
     .except("update");
 }).middleware("auth");
