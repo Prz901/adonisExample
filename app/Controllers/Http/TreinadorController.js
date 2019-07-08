@@ -1,6 +1,7 @@
 "use strict";
 
 const Treinador = use("App/Models/Treinador");
+const User = use("App/Models/Treinador");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -45,7 +46,11 @@ class TreinadorController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show({ params, request, response, view }) {}
+  async show({ params, request, response, view }) {
+    const user = await User.find(auth.user.id);
+    const treinador = await user.treinador().fetch();
+    return response.send(treinador);
+  }
 
   /**
    * Update treinador details.

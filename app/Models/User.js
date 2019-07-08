@@ -35,7 +35,7 @@ class User extends Model {
     return this.hasMany("App/Models/Token");
   }
   treinador() {
-    return this.hasOne("App/Models/Treinador", "user_id", "id");
+    return this.belongsTo("App/Models/Treinador", "id", "user_id");
   }
 }
 
